@@ -23,6 +23,15 @@ class LocationController extends Controller
         return view('locations.show', compact('location'));
     }
 
+
+    public function findById(int $id): Location
+    {
+        return Location::where('id', $id)
+            ->with(['vaccinations'])
+            ->first();
+
+    }
+
     public function findByZipcode(int $zipcode): Location
     {
         return Location::where('zipcode', $zipcode)

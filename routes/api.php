@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VaccinationController;
@@ -16,30 +17,37 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('auth/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/* Locations REST */
-Route::get('locations', [LocationController::class,'index']);
-Route::get('locations/{zipcode}', [LocationController::class,'findByZipcode']);
-Route::get('locations/checkzipcode/{zipcode}', [LocationController::class,'checkZipcode']);
+
+Route::get('locations', [LocationController::class, 'index']);
+Route::get('locations/zip/{zipcode}', [LocationController::class, 'findByZipcode']);
+Route::get('locations/{id}', [LocationController::class, 'findById']);
+Route::get('locations/checkzipcode/{zipcode}', [LocationController::class, 'checkZipcode']);
 Route::get('/locations/search/{searchTerm}', [LocationController::class, 'findBySearchTerm']);
-Route::delete('locations/{id}', [LocationController::class,'delete']);
-Route::put('locations/{id}', [LocationController::class,'update']);
-Route::post('locations', [LocationController::class,'save']);
+Route::get('vaccinations', [VaccinationController::class, 'index']);
 
-/* Users REST */
-Route::put('users/{id}', [UserController::class,'update']);
-Route::get('users', [UserController::class,'index']);
-Route::delete('users/{id}', [UserController::class,'delete']);
-Route::post('users', [UserController::class,'save']);
+/*  REST Calls with Authentication */
+Route::group(['middleware' => ['api', 'auth.jwt']], function () {
+    Route::post('auth/logout', [AuthController::class, 'logout']);
+});
+    /* Locations REST */
+    Route::delete('locations/{id}', [LocationController::class, 'delete']);
+    Route::put('locations/{id}', [LocationController::class, 'update']);
+    Route::post('locations', [LocationController::class, 'save']);
 
+    /* Users REST */
+    Route::get('users', [UserController::class, 'index']);
+    Route::put('users/{id}', [UserController::class, 'update']);
+    Route::delete('users/{id}', [UserController::class, 'delete']);
+    Route::post('users', [UserController::class, 'save']);
 
-/* Vaccinations REST */
+    /* Vaccinations REST */
+    Route::post('vaccinations', [VaccinationController::class, 'save']);
+    Route::put('vaccinations/{id}', [VaccinationController::class, 'update']);
+    Route::delete('vaccinations/{id}', [VaccinationController::class, 'delete']);
 
-Route::get('vaccinations', [VaccinationController::class,'index']);
-Route::post('vaccinations', [VaccinationController::class,'save']);
-Route::put('vaccinations/{id}', [VaccinationController::class,'update']);
-Route::delete('vaccinations/{id}', [VaccinationController::class,'delete']);

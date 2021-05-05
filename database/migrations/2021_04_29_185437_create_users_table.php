@@ -17,13 +17,15 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('firstName');
             $table->string('lastName');
-            $table->string('email');
             $table->string('phone');
             $table->string('sex');
             $table->string('ssn')->unique();
             $table->boolean('isVaccinated');
             $table->boolean('isAdmin');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->rememberToken();
             $table->bigInteger('vaccination_id')->unsigned();
             // create constraint in DB
             $table->foreign('vaccination_id')
