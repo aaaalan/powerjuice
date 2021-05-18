@@ -57,12 +57,14 @@ class LocationsTableSeeder extends Seeder
 
         $vaccination1 = new \App\Models\Vaccination;
         $vaccination1->date="2015-09-22";
-        $vaccination1->time="07:07:07";
+        $vaccination1->startTime="07:07:07";
+        $vaccination1->endTime="08:08:09";
         $vaccination1->maxUsers=7;
 
         $vaccination2 = new \App\Models\Vaccination;
         $vaccination2->date="2021-09-22";
-        $vaccination2->time="08:08:08";
+        $vaccination2->startTime="08:08:08";
+        $vaccination2->endTime="09:09:09";
         $vaccination2->maxUsers=8;
 
         $location->vaccinations()->saveMany([$vaccination1,$vaccination2]);

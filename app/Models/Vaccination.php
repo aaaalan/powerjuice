@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Vaccination extends Model
 {
     use HasFactory;
-    protected $fillable = ['date', 'time','maxUsers','location_id'];
+    protected $fillable = ['date', 'startTime','endTime','maxUsers','location_id'];
+
 
 
 

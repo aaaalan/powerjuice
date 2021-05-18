@@ -58,7 +58,7 @@ class LocationController extends Controller
             ->orWhereHas('vaccinations', function ($query) use ($searchTerm)
             {
                 $query
-                    ->where('time', 'LIKE', '%' . $searchTerm . '%')
+                    ->where('startTime', 'LIKE', '%' . $searchTerm . '%')
                     ->orWhere('date', 'LIKE', '%' . $searchTerm . '%');
             })->get();
     }
@@ -88,7 +88,8 @@ class LocationController extends Controller
                             'id'=>$vaccination['id'],
                             'maxUsers'=>$vaccination['maxUsers'],
                             'date'=>$vaccination['date'],
-                            'time'=>$vaccination['time'],
+                            'startTime'=>$vaccination['time'],
+                            'endTime'=>$vaccination['time'],
                             'location_id'=>$vaccination['location_id'],
                             'created_at' => $vaccination['created_at'],
                             'updated_at' => $vaccination['updated_at'],

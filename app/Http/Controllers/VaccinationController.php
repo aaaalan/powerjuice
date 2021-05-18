@@ -12,9 +12,24 @@ class VaccinationController extends Controller
 {
     public function index()
     {
-        $vaccination = Vaccination::with(['users'])->get();
+        $vaccination = Vaccination::with(['users', 'location'])->get();
         return $vaccination;
     }
+    public function getLocationNameFromVaccination($id)
+    {
+        return Vaccination::select('locations.name')
+            ->leftJoin('locations','vaccinations.location_id','=','locations.id')
+            ->get();
+    }
+
+    public function findById(int $id): Vaccination
+    {
+        return Vaccination::where('id', $id)
+            ->with(['location', 'users'])
+            ->first();
+
+    }
+
 
     public function save(Request $request): JsonResponse
     {

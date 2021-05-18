@@ -29,7 +29,9 @@ Route::get('locations/zip/{zipcode}', [LocationController::class, 'findByZipcode
 Route::get('locations/{id}', [LocationController::class, 'findById']);
 Route::get('locations/checkzipcode/{zipcode}', [LocationController::class, 'checkZipcode']);
 Route::get('/locations/search/{searchTerm}', [LocationController::class, 'findBySearchTerm']);
+Route::get('vaccinations/{id}', [VaccinationController::class, 'findById']);
 Route::get('vaccinations', [VaccinationController::class, 'index']);
+Route::get('vaccinations/getLocationName/{id}', [VaccinationController::class, 'getLocationNameFromVaccination']);
 
 /*  REST Calls with Authentication */
 Route::group(['middleware' => ['api', 'auth.jwt']], function () {

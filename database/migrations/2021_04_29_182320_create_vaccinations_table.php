@@ -18,7 +18,8 @@ class CreateVaccinationsTable extends Migration
 
             $table->integer('maxUsers');
             $table->date('date');
-            $table->time('time');
+            $table->time('startTime');
+            $table->time('endTime');
             //fk
             $table->bigInteger('location_id')->nullable()->unsigned();
             // create constraint in DB
