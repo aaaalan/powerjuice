@@ -19,6 +19,30 @@ class UserController extends Controller
 
     }
 
+    public function checkUser(int $ssn)
+    {
+        $user = User::where('ssn', $ssn)->first();
+        return $user != null ? response()
+            ->json(true, 200) : response()
+            ->json(false, 200);
+    }
+    public function checkUserMail(string $email)
+    {
+        $user = User::where('email', $email)->first();
+        return $user != null ? response()
+            ->json(true, 200) : response()
+            ->json(false, 200);
+    }
+
+
+    public function findById(int $id): User
+    {
+        return User::where('id', $id)
+            ->with(['vaccination'])
+            ->first();
+    }
+
+
 
     public function save(Request $request): JsonResponse
     {

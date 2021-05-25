@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         $user->ssn ="5363160196";
         $user->sex ="m";
         $user->isVaccinated =false;
-        $user->isAdmin =false;
+        $user->isAdmin =true;
         $user->save();
 
     }

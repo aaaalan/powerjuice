@@ -14,7 +14,7 @@ class LocationController extends Controller
 
     public function index()
     {
-        $locations = Location::with(['vaccinations'])->get();
+        $locations = Location::with(['vaccinations'])->orderBy('name', 'desc')->get();
         return $locations;
     }
 

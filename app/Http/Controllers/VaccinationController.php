@@ -63,7 +63,7 @@ class VaccinationController extends Controller
             return response()->json($vaccination, 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json("saving vaccination failed: " . $request['date'] . $e->getMessage(), 420);
+            return response()->json("saving vaccination failed: ->" . $e->getMessage(), 420);
         }
 
 
