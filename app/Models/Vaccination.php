@@ -12,9 +12,6 @@ class Vaccination extends Model
     use HasFactory;
     protected $fillable = ['date', 'startTime','endTime','maxUsers','location_id'];
 
-
-
-
     public function users():HasMany{
         return $this->hasMany(User::class);
     }

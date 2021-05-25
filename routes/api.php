@@ -40,20 +40,22 @@ Route::group(['middleware' => ['api', 'auth.jwt']], function () {
     Route::delete('locations/{id}', [LocationController::class, 'delete']);
     Route::put('locations/{id}', [LocationController::class, 'update']);
     Route::post('locations', [LocationController::class, 'save']);
-});
-
-
     /* Users REST */
     Route::get('users', [UserController::class, 'index']);
     Route::put('users/{id}', [UserController::class, 'update']);
     Route::delete('users/{id}', [UserController::class, 'delete']);
     Route::post('users', [UserController::class, 'save']);
     Route::get('user/{id}', [UserController::class, 'findById']);
-    Route::get('user/check/{id}', [UserController::class, 'checkUser']);
-    Route::get('user/checkMail/{id}', [UserController::class, 'checkUserMail']);
 
     /* Vaccinations REST */
     Route::post('vaccinations', [VaccinationController::class, 'save']);
     Route::put('vaccinations/{id}', [VaccinationController::class, 'update']);
     Route::delete('vaccinations/{id}', [VaccinationController::class, 'delete']);
+});
+
+
+
+    Route::get('user/check/{id}', [UserController::class, 'checkUser']);
+    Route::get('user/checkMail/{id}', [UserController::class, 'checkUserMail']);
+
 
